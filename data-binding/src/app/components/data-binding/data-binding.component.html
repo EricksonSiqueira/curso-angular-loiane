@@ -79,4 +79,21 @@
   <article>
     <app-output-property [counter]="10" (valueHasChanged)="onValueHasChanged($event)"></app-output-property>
   </article>
+  <br>
+  <hr>
+  <article>
+
+    <app-cicle [initialValue]="initialValue" *ngIf="!shouldDeleteCicle"></app-cicle>
+    <button (click)="changeCicleValue()" class="btn btn-primary">
+      Cicle plus
+    </button>
+    <div>
+      <button (click)="destroyCicle()" class="btn btn-danger">
+        Destroy cicle
+      </button>
+      <button (click)="showCicle()" class="btn btn-success">
+        Show cicle
+      </button>
+    </div>
+  </article>
 </section>

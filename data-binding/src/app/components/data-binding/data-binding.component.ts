@@ -29,6 +29,9 @@ export class DataBindingComponent {
   courseName = 'loiane course';
   otherCourseName = 'loiane course v2.2';
 
+  initialValue = 5;
+  shouldDeleteCicle = false;
+
   getValue() {
     return 1;
   }
@@ -55,5 +58,17 @@ export class DataBindingComponent {
 
   onValueHasChanged(event: any) {
     console.log(event.newValue);
+  }
+
+  changeCicleValue() {
+    this.initialValue++;
+  }
+
+  destroyCicle() {
+    this.shouldDeleteCicle = true;
+  }
+
+  showCicle() {
+    this.shouldDeleteCicle = false;
   }
 }
