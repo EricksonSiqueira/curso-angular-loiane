@@ -26,6 +26,9 @@ export class DataBindingComponent {
     name: 'John',
   };
 
+  courseName = 'loiane course';
+  otherCourseName = 'loiane course v2.2';
+
   getValue() {
     return 1;
   }
