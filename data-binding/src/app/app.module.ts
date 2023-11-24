@@ -11,9 +11,11 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { FormsModule } from '@angular/forms';
 import { MyFormModule } from './my-form/my-form.module';
 import { InputPropertyComponent } from './components/input-property/input-property.component';
+import { OutputPropertyComponent } from './components/output-property/output-property.component';
+import { CicleComponent } from './components/cicle/cicle.component';
 
 @NgModule({
-  declarations: [AppComponent, DataBindingComponent, InputPropertyComponent],
+  declarations: [AppComponent, DataBindingComponent, InputPropertyComponent, OutputPropertyComponent, CicleComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

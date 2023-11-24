@@ -73,6 +73,10 @@
   </article>
   <hr>
   <article>
-    <app-input-property [courseName]="courseName" [otherName]="otherCourseName"></app-input-property>
+    <app-input-property [courseName]="courseName" [otherName]="otherCourseName" value></app-input-property>
+  </article>
+  <hr>
+  <article>
+    <app-output-property [counter]="10" (valueHasChanged)="onValueHasChanged($event)"></app-output-property>
   </article>
 </section>
