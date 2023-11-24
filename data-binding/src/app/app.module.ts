@@ -8,9 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { FormsModule } from '@angular/forms';
+import { MyFormModule } from './my-form/my-form.module';
+import { InputPropertyComponent } from './components/input-property/input-property.component';
 
 @NgModule({
-  declarations: [AppComponent, DataBindingComponent],
+  declarations: [AppComponent, DataBindingComponent, InputPropertyComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,6 +21,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     TooltipModule.forRoot(),
     BsDropdownModule,
     AlertModule,
+    FormsModule,
+    MyFormModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

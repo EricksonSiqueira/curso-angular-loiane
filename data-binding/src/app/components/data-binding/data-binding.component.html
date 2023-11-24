@@ -34,6 +34,7 @@
   <alert [type]="type.value === 'danger' ? 'danger' : ''" [style.display]="type.value === 'danger' ? 'block' : 'none'">
     <strong>Oh snap!</strong> Change a few things up and try submitting again.
   </alert>
+  <hr>
 
   <article>
     <h3>Event binding</h3>
@@ -46,5 +47,32 @@
     <p>Input value is: {{actualInputValue}}</p>
     <p (mouseover)="onMouseOverAndOut()" (mouseout)="onMouseOverAndOut()" [class.highlight]="isMouseOver === true">Saved
       value is: {{savedValue}}</p>
+  </article>
+  <hr>
+
+  <article>
+    <h3>Two-way data binding</h3>
+    <div>
+      <div>
+        <span>Name with normal bindings</span>
+        <input type="text" [value]="name" (input)="name = nameField.value" #nameField />
+      </div>
+      <div>
+        <span>Using the two way data binding. The banana in the box!</span>
+        <input type="text" [(ngModel)]="name" />
+      </div>
+    </div>
+    <p>You typed the name: {{name}}</p>
+    <br>
+    <div>
+      <span>Using the two way data binding with. The banana in the box!</span>
+      <input type="text" [(ngModel)]="person.name" />
+      <input type="text" [(ngModel)]="person.age" />
+    </div>
+    <p>My name is {{person.name}} and my age is {{person.age}}</p>
+  </article>
+  <hr>
+  <article>
+    <app-input-property></app-input-property>
   </article>
 </section>

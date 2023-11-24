@@ -1,0 +1,21 @@
+<article>
+  <h2>This is the my form component!</h2>
+  <div>
+    <div>
+      <span>Name with normal bindings</span>
+      <input type="text" [value]="name" (input)="name = nameField.value" #nameField />
+    </div>
+    <div>
+      <span>Using the two way data binding. The banana in the box!</span>
+      <input type="text" [(ngModel)]="name" />
+    </div>
+  </div>
+  <p>You typed the name: {{name}}</p>
+  <br>
+  <div>
+    <span>Using the two way data binding with. The banana in the box!</span>
+    <input type="text" [(ngModel)]="person.name" />
+    <input type="text" [(ngModel)]="person.age" />
+  </div>
+  <p>My name is {{person.name}} and my age is {{person.age}}</p>
+</article>

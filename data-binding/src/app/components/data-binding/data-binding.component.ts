@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 
+interface Person {
+  name: string;
+  age: number;
+}
+
 @Component({
   selector: 'app-data-binding',
   templateUrl: './data-binding.component.html',
@@ -13,6 +18,13 @@ export class DataBindingComponent {
   actualInputValue = '';
   savedValue = '';
   isMouseOver = false;
+
+  name = '';
+
+  person: Person = {
+    age: 20,
+    name: 'John',
+  };
 
   getValue() {
     return 1;
