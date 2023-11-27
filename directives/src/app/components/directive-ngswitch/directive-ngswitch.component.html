@@ -1,0 +1,34 @@
+<br>
+<br>
+
+<div>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item" [class.active]="tab == 'home'" (click)="tab = 'home'">
+            <a class="nav-link" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item" [class.active]="tab == 'features'" (click)="tab = 'features'">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item" [class.active]="tab == 'pricing'" (click)="tab = 'pricing'">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" [ngSwitch]="tab">
+    <p *ngSwitchCase="'features'">
+      This is the features page.
+    </p>
+    <p *ngSwitchCase="'pricing'">
+      This is the pricing page.
+    </p>
+    <p *ngSwitchDefault>
+      This is the home page.
+    </p>
+  </div>
+</div>

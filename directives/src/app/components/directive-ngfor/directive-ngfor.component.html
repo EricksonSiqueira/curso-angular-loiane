@@ -1,0 +1,8 @@
+<div class="w-25 p-2">
+  <h2 class="title">All the new loiane courses using *ngFor</h2>
+  <ul class="list-group">
+    <li *ngFor="let course of courses, let i = index" class="list-group-item">
+      {{ i + 1 }} - {{course}}
+    </li>
+  </ul>
+</div>

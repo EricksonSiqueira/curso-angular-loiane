@@ -1,0 +1,19 @@
+<div>
+  <h2>With property binding</h2>
+  <button [style.backgroundColor]="active ? 'blue' : 'green'" [style.color]="active ? 'white' : 'black'"
+    [style.fontWeight]="active ? 'bold' : 'normal'" [style.fontSize]="fontSize + 'px'" (click)="active = !active">
+    Change atribute active
+  </button>
+  <br>
+  <input type="text" [(ngModel)]="fontSize">
+  <br>
+  <h2>With ngStyle</h2>
+  <button [ngStyle]="{
+      'background-color': active ? 'blue' : 'green',
+      'color': active ? 'white' : 'black',
+      'font-weight': active ? 'bold' : 'normal',
+      'font-size': fontSize + 'px'
+    }" (click)="active = !active">
+    Change atribute active
+  </button>
+</div>

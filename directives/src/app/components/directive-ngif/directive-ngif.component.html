@@ -1,0 +1,15 @@
+<h2>*ngIf</h2>
+
+<div *ngIf="courses.length > 0">Lista de cursos.</div>
+<br>
+<br>
+<div *ngIf="showCourses">Lista de cursos com boolean</div>
+<div *ngIf="!showCourses">Sem cursos para a lista boolean</div>
+<br>
+
+<h3>Com css (hidden)</h3>
+<div [hidden]="!showCourses">Lista de cursos com boolean</div>
+<div [hidden]="showCourses">Sem cursos para a lista boolean</div>
+<br>
+
+<button (click)="onShowCourses()">Toggle courses</button>
