@@ -12,6 +12,9 @@ import { DirectiveNgstyleComponent } from './components/directive-ngstyle/direct
 import { FormsModule } from '@angular/forms';
 import { ElvisOperatorComponent } from './components/elvis-operator/elvis-operator.component';
 import { NgContentExampleComponent } from './components/ng-content-example/ng-content-example.component';
+import { YellowBgDirective } from './directives/yellow-bg.directive';
+import { CustomDirectivesComponent } from './components/custom-directives/custom-directives.component';
+import { HighlightMouseDirective } from './directives/highlight-mouse.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { NgContentExampleComponent } from './components/ng-content-example/ng-co
     DirectiveNgstyleComponent,
     ElvisOperatorComponent,
     NgContentExampleComponent,
+    YellowBgDirective,
+    CustomDirectivesComponent,
+    HighlightMouseDirective,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [],
