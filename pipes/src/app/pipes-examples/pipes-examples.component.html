@@ -1,0 +1,13 @@
+<article>
+  <h2>Pipes</h2>
+  <div>
+    <p>Title: {{ book.title | uppercase | lowercase | camelCase}}</p>
+    <p>Stars: {{ book.rating | number:'1.1-2' }}</p>
+    <p>Pages: {{ book.pages | number }}</p>
+    <p>Price: {{ book.price | currency:'BRL':'symbol':'.2-2' }}</p>
+    <p>Launch date: {{ book.releaseDate | date:'dd-MM-YYYY' }}</p>
+    <p>Url: {{book.url}}</p>
+    <br>
+    <p>{{ book | json }}</p>
+  </div>
+</article>
