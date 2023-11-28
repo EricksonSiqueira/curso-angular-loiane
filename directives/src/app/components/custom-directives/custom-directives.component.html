@@ -5,4 +5,11 @@
   </button>
 
   <p highlightMouse>Text with highlight when mouse is over</p>
+  <p [highlight]="'yellow'" [defaultColor]="'gray'">Text with highlight when mouse is over</p>
+
+  <div *ngIf="showCourses">Lista de cursos com boolean</div>
+  <div *ngElse="showCourses">Sem cursos para a lista boolean</div>
+  <br>
+
+  <button (click)="onShowCourses()">Toggle courses</button>
 </div>
