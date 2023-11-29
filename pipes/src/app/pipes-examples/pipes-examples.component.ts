@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./pipes-examples.component.scss'],
 })
 export class PipesExamplesComponent {
+  filter = '';
+
   book = {
     title: 'Learning Angular from Loiane Groner course',
     rating: 4.54321,
@@ -14,4 +16,30 @@ export class PipesExamplesComponent {
     releaseDate: new Date(2016, 5, 23),
     url: 'https://www.packtpub.com/web-development/learning-angular-second-edition',
   };
+
+  newCourse = '';
+
+  books = ['Angular2', 'Java'];
+
+  onAddCourse() {
+    if (this.newCourse.trim() !== '') {
+      this.books.push(this.newCourse);
+      this.newCourse = '';
+      console.log(this.books);
+    }
+  }
+
+  getCourses() {
+    if (
+      this.books.length === 0 ||
+      this.filter === undefined ||
+      this.filter.trim() === ''
+    ) {
+      return this.books;
+    }
+
+    return this.books.filter(
+      (bk) => bk.toLowerCase().indexOf(this.filter.toLowerCase()) !== -1
+    );
+  }
 }
