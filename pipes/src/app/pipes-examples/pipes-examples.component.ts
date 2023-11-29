@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-pipes-examples',
@@ -42,4 +43,8 @@ export class PipesExamplesComponent {
       (bk) => bk.toLowerCase().indexOf(this.filter.toLowerCase()) !== -1
     );
   }
+
+  asyncValue = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('Data is here!'), 1000);
+  });
 }
