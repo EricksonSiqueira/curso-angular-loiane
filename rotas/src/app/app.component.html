@@ -2,11 +2,23 @@
   <div class="nav-wrapper container">
     <a routerLink="/" class="brand-logo">Rotas</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a routerLink="/login">Login</a></li>
-      <li><a routerLink="/courses">Courses</a></li>
+      <li routerLinkActive="active">
+        <a routerLink="/login">Login</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/courses" [queryParams]="{page: 1}">Courses</a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="'/course/' + courseId">Course with id</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/students">Students</a>
+      </li>
     </ul>
   </div>
 </nav>
 <div class="container">
+  <p>Enter the course id</p>
+  <input type="text" [(ngModel)]="courseId">
   <router-outlet></router-outlet>
 </div>

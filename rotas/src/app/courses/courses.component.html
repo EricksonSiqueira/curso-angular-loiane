@@ -1,1 +1,8 @@
-<p>courses works!</p>
+<h3>Page {{ page }}</h3>
+<div class="collection">
+  <a class="collection-item" *ngFor="let course of courses" [routerLink]="['/course', course.id]">
+    {{ course.name }}
+  </a>
+</div>
+<button (click)="previousPage()">Go to previous page</button>
+<button (click)="nextPage()">Go to next page</button>

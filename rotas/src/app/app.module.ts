@@ -5,20 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { CoursesComponent } from './courses/courses.component';
+import { FormsModule } from '@angular/forms';
+import { CoursesModule } from './courses/courses.module';
+import { StudentsComponent } from './students/students.component';
+import { StudentsModule } from './students/students.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    CoursesComponent
-  ],
+  declarations: [AppComponent, HomeComponent, LoginComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    CoursesModule,
+    StudentsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

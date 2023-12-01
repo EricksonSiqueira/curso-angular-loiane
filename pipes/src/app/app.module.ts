@@ -22,7 +22,7 @@ registerLocaleData(localePt);
     FilterArrayPipe,
     FilterArrayImpurePipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, FormsModule],
   providers: [
     SettingsService,
     {
