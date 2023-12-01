@@ -1,2 +1,17 @@
-<p>students works!</p>
-<router-outlet></router-outlet>
+<div class="row">
+  <div class="col s6">
+    <h3>
+      Students List
+    </h3>
+
+    <ul class="collection">
+      <a class="collection-item" [routerLink]="[student.id]" *ngFor="let student of students">{{student.name}}</a>
+    </ul>
+    <a class="btn addStudentLink" [routerLink]="'new'">
+      add new student
+    </a>
+  </div>
+  <div class=" col s6">
+    <router-outlet></router-outlet>
+  </div>
+</div>

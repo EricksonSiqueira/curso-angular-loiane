@@ -1,1 +1,24 @@
-<p>students-form works!</p>
+<div class="col s12">
+  <h3>Create new student</h3>
+  <div class="row">
+    <div class="input-field col s12">
+      <input disable [(ngModel)]="student.id" type="text" id="disable" class="validate">
+      <label for="disable" [ngClass]="{'active': student.id}">#</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input disable [(ngModel)]="student.name" type="text" id="name">
+      <label for="name" [ngClass]="{'active': student.name}">Name</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input disable [(ngModel)]="student.email" type="text" id="email">
+      <label for="email" [ngClass]="{'active': student.email}">Email</label>
+    </div>
+  </div>
+  <button (click)="handleStudent()" class="waves-effect btn w-100">
+    create student
+  </button>
+</div>
