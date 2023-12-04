@@ -6,6 +6,7 @@ import { StudentsFormComponent } from './students-form/students-form.component';
 import { StudentsNotFoundComponent } from './students-not-found/students-not-found.component';
 import { StudentsGuard } from '../guards/students.guard';
 import { StudentsDeactivateGuard } from '../guards/students-deactivate.guard';
+import { StudentResolver } from './guards/student-detail.resolver';
 
 const studentsRoutes: Routes = [
   {
@@ -19,7 +20,11 @@ const studentsRoutes: Routes = [
         canDeactivate: [StudentsDeactivateGuard],
       },
       { path: 'not-found', component: StudentsNotFoundComponent },
-      { path: ':id', component: StudentsDetailsComponent },
+      {
+        path: ':id',
+        component: StudentsDetailsComponent,
+        resolve: { student: StudentResolver },
+      },
       {
         path: ':id/edit',
         component: StudentsFormComponent,

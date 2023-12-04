@@ -9,6 +9,7 @@ import { StudentsRoutingModule } from './students-routing.module';
 import { StudentsService } from './students.service';
 import { StudentsNotFoundComponent } from './students-not-found/students-not-found.component';
 import { StudentsDeactivateGuard } from '../guards/students-deactivate.guard';
+import { StudentResolver } from './guards/student-detail.resolver';
 
 @NgModule({
   imports: [CommonModule, FormsModule, StudentsRoutingModule],
@@ -19,6 +20,6 @@ import { StudentsDeactivateGuard } from '../guards/students-deactivate.guard';
     StudentsDetailsComponent,
     StudentsNotFoundComponent,
   ],
-  providers: [StudentsService, StudentsDeactivateGuard],
+  providers: [StudentsService, StudentsDeactivateGuard, StudentResolver],
 })
 export class StudentsModule {}
