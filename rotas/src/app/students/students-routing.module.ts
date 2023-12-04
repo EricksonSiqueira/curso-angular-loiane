@@ -5,6 +5,7 @@ import { StudentsDetailsComponent } from './students-details/students-details.co
 import { StudentsFormComponent } from './students-form/students-form.component';
 import { StudentsNotFoundComponent } from './students-not-found/students-not-found.component';
 import { StudentsGuard } from '../guards/students.guard';
+import { StudentsDeactivateGuard } from '../guards/students-deactivate.guard';
 
 const studentsRoutes: Routes = [
   {
@@ -12,10 +13,18 @@ const studentsRoutes: Routes = [
     component: StudentsComponent,
     canActivateChild: [StudentsGuard],
     children: [
-      { path: 'new', component: StudentsFormComponent },
+      {
+        path: 'new',
+        component: StudentsFormComponent,
+        canDeactivate: [StudentsDeactivateGuard],
+      },
       { path: 'not-found', component: StudentsNotFoundComponent },
       { path: ':id', component: StudentsDetailsComponent },
-      { path: ':id/edit', component: StudentsFormComponent },
+      {
+        path: ':id/edit',
+        component: StudentsFormComponent,
+        canDeactivate: [StudentsDeactivateGuard],
+      },
     ],
   },
 ];
