@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="showHeader">
   <div class="nav-wrapper container">
     <a routerLink="/" class="brand-logo">Rotas</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -18,7 +18,7 @@
   </div>
 </nav>
 <div class="container">
-  <p>Enter the course id</p>
-  <input type="text" [(ngModel)]="courseId">
+  <!-- <p>Enter the course id</p>
+  <input type="text" [(ngModel)]="courseId"> -->
   <router-outlet></router-outlet>
 </div>

@@ -33,8 +33,10 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   previousPage(): void {
-    this.page--;
-    this.router.navigate(['/courses'], { queryParams: { page: this.page } });
+    if (this.page > 1) {
+      this.page--;
+      this.router.navigate(['/courses'], { queryParams: { page: this.page } });
+    }
   }
 
   nextPage(): void {

@@ -6,19 +6,10 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-import { CoursesModule } from './courses/courses.module';
-import { StudentsComponent } from './students/students.component';
-import { StudentsModule } from './students/students.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    CoursesModule,
-    StudentsModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

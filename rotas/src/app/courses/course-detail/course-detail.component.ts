@@ -27,7 +27,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
       const courseFound = this.coursesService.getCourse(+this.id);
 
       if (courseFound === null) {
-        this.router.navigate(['/course-not-found']);
+        this.router.navigate(['/courses/not-found']);
         return;
       }
 

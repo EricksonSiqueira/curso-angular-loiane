@@ -7,7 +7,7 @@ import { StudentsNotFoundComponent } from './students-not-found/students-not-fou
 
 const studentsRoutes: Routes = [
   {
-    path: 'students',
+    path: '',
     component: StudentsComponent,
     children: [
       { path: 'new', component: StudentsFormComponent },

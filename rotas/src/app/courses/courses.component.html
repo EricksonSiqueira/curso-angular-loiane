@@ -1,8 +1,10 @@
 <h3>Page {{ page }}</h3>
 <div class="collection">
-  <a class="collection-item" *ngFor="let course of courses" [routerLink]="['/course', course.id]">
+  <a class="collection-item" *ngFor="let course of courses" [routerLink]="['/courses', course.id]">
     {{ course.name }}
   </a>
 </div>
-<button (click)="previousPage()">Go to previous page</button>
-<button (click)="nextPage()">Go to next page</button>
+<div class="btnWrapper">
+  <button class="btn" (click)="previousPage()">Go to previous page</button>
+  <button class="btn" (click)="nextPage()">Go to next page</button>
+</div>
