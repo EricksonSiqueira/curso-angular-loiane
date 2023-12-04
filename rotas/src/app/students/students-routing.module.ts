@@ -4,11 +4,13 @@ import { StudentsComponent } from './students.component';
 import { StudentsDetailsComponent } from './students-details/students-details.component';
 import { StudentsFormComponent } from './students-form/students-form.component';
 import { StudentsNotFoundComponent } from './students-not-found/students-not-found.component';
+import { StudentsGuard } from '../guards/students.guard';
 
 const studentsRoutes: Routes = [
   {
     path: '',
     component: StudentsComponent,
+    canActivateChild: [StudentsGuard],
     children: [
       { path: 'new', component: StudentsFormComponent },
       { path: 'not-found', component: StudentsNotFoundComponent },
