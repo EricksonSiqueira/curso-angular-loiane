@@ -1,12 +1,16 @@
 <form class="d-flex flex-column gap-4" #form="ngForm" (ngSubmit)="onSubmit(form)">
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" name="name" id="name" class="form-control" placeholder="Name" [(ngModel)]="user.name">
+    <input type="text" name="name" id="name" class="form-control" placeholder="Name" [(ngModel)]="user.name" required
+      #name>
+    <div>
+      {{name.className}}
+    </div>
   </div>
   <div class="form-group">
     <label for="email">Email</label>
     <input type="text" name="email" id="email" class="form-control" placeholder="name@email.com"
-      [(ngModel)]="user.email">
+      [(ngModel)]="user.email" required email>
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>
