@@ -25,7 +25,12 @@ export class TemplateFormComponent {
   }
 
   onSubmit(form: any) {
-    console.log(form);
+    this.http
+      .post('https://httpbin.org/post', JSON.stringify(form.value))
+      .subscribe((data: any) => {
+        console.log(data);
+        form.form.reset();
+      });
   }
 
   consultCEP(cep: string, form: any) {
