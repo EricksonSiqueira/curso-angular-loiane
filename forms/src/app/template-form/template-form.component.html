@@ -13,59 +13,62 @@
     <app-error-field [showError]="isInvalidTouched(email)" errorText="Email must be valid.">
     </app-error-field>
   </div>
-  <div class="row g-3">
-    <div class="col-2">
-      <label for="cep">CEP</label>
-      <input type="text" name="cep" id="cep" class="form-control" placeholder="00.000-000" ngModel required cep
-        #cep="ngModel">
-      <app-error-field [showError]="isInvalidTouched(cep)" errorText="CEP is required.">
-      </app-error-field>
-    </div>
-    <div class="col-2">
-      <label for="number">Number</label>
-      <input type="text" name="number" id="number" class="form-control" placeholder="12" ngModel required number
-        #number="ngModel">
-      <app-error-field [showError]="isInvalidTouched(number)" errorText="Number is required.">
-      </app-error-field>
-    </div>
-    <div class="col-8">
-      <label for="complement">Complement</label>
-      <input type="text" name="complement" id="complement" class="form-control" placeholder="apartment 201 block 902"
-        ngModel required complement #complement="ngModel">
-      <app-error-field [showError]="isInvalidTouched(complement)" errorText="Compcomplement is required.">
-      </app-error-field>
-    </div>
-  </div>
 
-  <div class="form-group">
-    <label for="street">Street</label>
-    <input type="text" name="street" id="street" class="form-control" placeholder="Street" [(ngModel)]="user.street"
-      required #street="ngModel">
-    <app-error-field [showError]="isInvalidTouched(street)" errorText="Street is required.">
-    </app-error-field>
-  </div>
+  <div ngModelGroup="address">
+    <div class="row g-3">
+      <div class="col-2">
+        <label for="cep">CEP</label>
+        <input type="text" name="cep" id="cep" class="form-control" placeholder="00.000-000" ngModel required cep
+          #cep="ngModel" (blur)="consultCEP(cep.value, form)">
+        <app-error-field [showError]="isInvalidTouched(cep)" errorText="CEP is required.">
+        </app-error-field>
+      </div>
+      <div class="col-2">
+        <label for="number">Number</label>
+        <input type="text" name="number" id="number" class="form-control" placeholder="12" ngModel required number
+          #number="ngModel">
+        <app-error-field [showError]="isInvalidTouched(number)" errorText="Number is required.">
+        </app-error-field>
+      </div>
+      <div class="col-8">
+        <label for="complement">Complement</label>
+        <input type="text" name="complement" id="complement" class="form-control" placeholder="apartment 201 block 902"
+          ngModel required complement #complement="ngModel">
+        <app-error-field [showError]="isInvalidTouched(complement)" errorText="Compcomplement is required.">
+        </app-error-field>
+      </div>
+    </div>
 
-  <div class="row g-3">
-    <div class="col-5">
-      <label for="neighborhood">Neighborhood</label>
-      <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Bangu" ngModel required
-        neighborhood #neighborhood="ngModel">
-      <app-error-field [showError]="isInvalidTouched(neighborhood)" errorText="Neineighborhood is required.">
+    <div class="form-group">
+      <label for="street">Street</label>
+      <input type="text" name="street" id="street" class="form-control" placeholder="Street" [(ngModel)]="user.street"
+        required #street="ngModel">
+      <app-error-field [showError]="isInvalidTouched(street)" errorText="Street is required.">
       </app-error-field>
     </div>
-    <div class="col-4">
-      <label for="city">City</label>
-      <input type="text" name="city" id="city" class="form-control" placeholder="Rio de Janeiro" ngModel required city
-        #city="ngModel">
-      <app-error-field [showError]="isInvalidTouched(city)" errorText="City is required.">
-      </app-error-field>
-    </div>
-    <div class="col-3">
-      <label for="state">State</label>
-      <input type="text" name="state" id="state" class="form-control" placeholder="Rio de Janeiro" ngModel required
-        state #state="ngModel">
-      <app-error-field [showError]="isInvalidTouched(state)" errorText="State is required">
-      </app-error-field>
+
+    <div class="row g-3">
+      <div class="col-5">
+        <label for="neighborhood">Neighborhood</label>
+        <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Bangu" ngModel
+          required neighborhood #neighborhood="ngModel">
+        <app-error-field [showError]="isInvalidTouched(neighborhood)" errorText="Neineighborhood is required.">
+        </app-error-field>
+      </div>
+      <div class="col-4">
+        <label for="city">City</label>
+        <input type="text" name="city" id="city" class="form-control" placeholder="Rio de Janeiro" ngModel required city
+          #city="ngModel">
+        <app-error-field [showError]="isInvalidTouched(city)" errorText="City is required.">
+        </app-error-field>
+      </div>
+      <div class="col-3">
+        <label for="state">State</label>
+        <input type="text" name="state" id="state" class="form-control" placeholder="Rio de Janeiro" ngModel required
+          state #state="ngModel">
+        <app-error-field [showError]="isInvalidTouched(state)" errorText="State is required">
+        </app-error-field>
+      </div>
     </div>
   </div>
 
