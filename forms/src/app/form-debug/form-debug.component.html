@@ -1,0 +1,12 @@
+<div *ngIf="!!form">
+  <h3>Debug</h3>
+  <p>
+    Is valid? {{ form?.valid }}
+  </p>
+  <p>
+    Is submitted? {{ form?.submitted }}
+  </p>
+  <p>
+    {{ form?.value | json }}
+  </p>
+</div>

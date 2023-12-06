@@ -11,6 +11,16 @@ export class TemplateFormComponent {
     email: null,
   };
 
+  isInvalidTouched(field: any) {
+    return !field.valid && field.touched;
+  }
+
+  applyErrorCss(field: any) {
+    return {
+      'is-invalid': field.invalid && field.touched,
+    };
+  }
+
   onSubmit(form: any) {
     console.log(form);
 
