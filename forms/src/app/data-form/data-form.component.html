@@ -62,8 +62,10 @@
       </div>
       <div class="col-3">
         <label for="state">State</label>
-        <input type="text" name="state" id="state" class="form-control" placeholder="Rio de Janeiro"
+        <select type="text" name="state" id="state" class="form-control" placeholder="Rio de Janeiro"
           formControlName="state">
+          <option *ngFor="let state of states | async" [value]="state.acronym">{{state.name}}</option>
+        </select>
         <app-error-field [showError]="verifyValidTouched('address.state')" errorText="State is required">
         </app-error-field>
       </div>

@@ -1,5 +1,5 @@
 export interface BrazilianState {
   id: number;
-  sigla: string;
-  nome: string;
+  acronym: string;
+  name: string;
 }

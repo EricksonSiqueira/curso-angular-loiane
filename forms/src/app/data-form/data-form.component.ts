@@ -9,6 +9,7 @@ import {
 import { DropdownService } from '../shared/services/dropdown.service';
 import { BrazilianState } from '../shared/models/brazilian-state';
 import { CepService } from '../shared/services/cep.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-data-form',
@@ -17,7 +18,8 @@ import { CepService } from '../shared/services/cep.service';
 })
 export class DataFormComponent implements OnInit {
   form!: FormGroup;
-  states!: BrazilianState[];
+  // states!: BrazilianState[];
+  states!: Observable<BrazilianState[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,9 +34,11 @@ export class DataFormComponent implements OnInit {
     //   email: new FormControl(''),
     // });
 
-    this.dropdownService.getBrazilianStates().subscribe((data) => {
-      this.states = data as BrazilianState[];
-    });
+    // this.dropdownService.getBrazilianStates().subscribe((data) => {
+    //   this.states = data as BrazilianState[];
+    // });
+
+    this.states = this.dropdownService.getBrazilianStates();
 
     this.form = this.formBuilder.group({
       name: [
