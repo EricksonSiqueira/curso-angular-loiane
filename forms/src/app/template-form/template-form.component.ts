@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { CepService } from '../shared/services/cep.service';
 
 @Component({
   selector: 'app-template-form',
@@ -12,7 +13,7 @@ export class TemplateFormComponent {
     email: null,
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cepService: CepService) {}
 
   isInvalidTouched(field: any) {
     return !field.valid && field.touched;
@@ -34,15 +35,10 @@ export class TemplateFormComponent {
   }
 
   consultCEP(cep: string, form: any) {
-    const treatedCep = cep.replace(/\D/g, '');
-
     if (cep != null && cep !== '') {
-      this.http
-        .get(`https://viacep.com.br/ws/${treatedCep}/json/`)
-        .subscribe((data: any) => {
-          console.log(data);
-          this.populateForm(data, form);
-        });
+      this.cepService.getCep(cep)?.subscribe((data) => {
+        this.populateForm(data, form);
+      });
     }
   }
 
