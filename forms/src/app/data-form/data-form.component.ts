@@ -10,6 +10,8 @@ import { DropdownService } from '../shared/services/dropdown.service';
 import { BrazilianState } from '../shared/models/brazilian-state';
 import { CepService } from '../shared/services/cep.service';
 import { Observable } from 'rxjs';
+import { Role } from '../shared/models/role';
+import { Technology } from '../shared/models/technology';
 
 @Component({
   selector: 'app-data-form',
@@ -20,6 +22,8 @@ export class DataFormComponent implements OnInit {
   form!: FormGroup;
   // states!: BrazilianState[];
   states!: Observable<BrazilianState[]>;
+  roles!: Role[];
+  techs!: Technology[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,6 +43,8 @@ export class DataFormComponent implements OnInit {
     // });
 
     this.states = this.dropdownService.getBrazilianStates();
+    this.roles = this.dropdownService.getRoles();
+    this.techs = this.dropdownService.getTechnologies();
 
     this.form = this.formBuilder.group({
       name: [
@@ -59,6 +65,9 @@ export class DataFormComponent implements OnInit {
         city: ['', Validators.required],
         state: ['', Validators.required],
       }),
+
+      role: [''],
+      techs: [''],
     });
   }
   onSubmit() {
@@ -129,5 +138,24 @@ export class DataFormComponent implements OnInit {
         state: data.uf,
       },
     });
+  }
+
+  setRole() {
+    const role = {
+      name: 'Developer',
+      lvl: 'Senior',
+      description: 'experienced developer',
+    };
+    this.form.get('role')?.setValue(role);
+  }
+
+  compareRoles(obj1: Role, obj2: Role) {
+    return obj1 && obj2
+      ? obj1.name === obj2.name && obj1.lvl === obj2.lvl
+      : obj1 === obj2;
+  }
+
+  setTechs() {
+    this.form.get('techs')?.setValue(['Java', 'JavaScript']);
   }
 }
