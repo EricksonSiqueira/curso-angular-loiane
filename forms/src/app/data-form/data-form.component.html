@@ -1,12 +1,16 @@
 <form class="d-flex flex-column gap-2" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="form-group">
+  <div class="form-group" [ngClass]="applyCssError('name')">
     <label for="name">Name</label>
     <input type="text" formControlName="name" id="name" class="form-control" placeholder="Name" required>
+    <app-error-field errorText="Name is required" [showError]="verifyValidTouched('name')"></app-error-field>
   </div>
-  <div class="form-group">
+  <div class="form-group" [ngClass]="applyCssError('email')">
     <label for="email">Email</label>
     <input type="text" formControlName="email" id="email" class="form-control" placeholder="name@email.com" required
       email>
+    <app-error-field errorText="Email is required"
+      [showError]="(form.get('email')?.errors?.['required'] && form.get('email')?.touched) || false"></app-error-field>
+    <app-error-field errorText="Email must be a valid email address" [showError]="isEmailValid()"></app-error-field>
   </div>
   <button type="submit" class="btn btn-primary mt-2 w-25" [disabled]="form.invalid">Submit</button>
   <app-form-debug [form]="form"></app-form-debug>
