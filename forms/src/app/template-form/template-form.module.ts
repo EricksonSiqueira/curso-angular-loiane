@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FormDebugComponent } from '../form-debug/form-debug.component';
-import { ErrorFieldComponent } from '../error-field/error-field.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TemplateFormComponent } from './template-form.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [
-    FormDebugComponent,
-    TemplateFormComponent,
-    ErrorFieldComponent,
-    ErrorFieldComponent,
-  ],
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  declarations: [TemplateFormComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, SharedModule],
 })
 export class TemplateFormModule {}

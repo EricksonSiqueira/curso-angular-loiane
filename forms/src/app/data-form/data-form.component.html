@@ -1,1 +1,13 @@
-<p>data-form works!</p>
+<form class="d-flex flex-column gap-2" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" formControlName="name" id="name" class="form-control" placeholder="Name" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" formControlName="email" id="email" class="form-control" placeholder="name@email.com" required
+      email>
+  </div>
+  <button type="submit" class="btn btn-primary mt-2 w-25" [disabled]="form.invalid">Submit</button>
+  <app-form-debug [form]="form"></app-form-debug>
+</form>
