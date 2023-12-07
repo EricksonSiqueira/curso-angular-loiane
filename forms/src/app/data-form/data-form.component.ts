@@ -45,15 +45,30 @@ export class DataFormComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.http
-      .post('https://httpbiaaan.org/post', JSON.stringify(this.form.value))
-      .subscribe(
-        (data: any) => {
-          console.log(data);
-          this.form.reset();
-        },
-        (error) => alert('erro')
-      );
+    if (this.form.valid) {
+      this.http
+        .post('https://httpbiaaan.org/post', JSON.stringify(this.form.value))
+        .subscribe(
+          (data: any) => {
+            console.log(data);
+            this.form.reset();
+          },
+          (error) => alert('erro')
+        );
+    } else {
+      console.log('form invalido');
+      this.verifyFormValidation(this.form);
+    }
+  }
+
+  verifyFormValidation(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((field) => {
+      const control = formGroup.get(field);
+      control?.markAsTouched();
+      if (control instanceof FormGroup) {
+        this.verifyFormValidation(control);
+      }
+    });
   }
 
   isEmailValid() {
