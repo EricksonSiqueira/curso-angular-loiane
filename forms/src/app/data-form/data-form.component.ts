@@ -33,6 +33,15 @@ export class DataFormComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
+      address: this.formBuilder.group({
+        cep: ['', Validators.required],
+        number: ['', Validators.required],
+        complement: [''],
+        street: ['', Validators.required],
+        neighborhood: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['', Validators.required],
+      }),
     });
   }
   onSubmit() {
@@ -65,5 +74,31 @@ export class DataFormComponent implements OnInit {
     return {
       'is-invalid': this.verifyValidTouched(field),
     };
+  }
+
+  consultCEP() {
+    const treatedCep = this.form.get('address.cep')?.value.replace(/\D/g, '');
+
+    if (treatedCep != null && treatedCep !== '') {
+      this.http
+        .get(`https://viacep.com.br/ws/${treatedCep}/json/`)
+        .subscribe((data: any) => {
+          console.log(data);
+          this.populateForm(data);
+        });
+    }
+  }
+
+  populateForm(data: any) {
+    this.form.patchValue({
+      address: {
+        cep: data.cep,
+        complement: data.complemento,
+        street: data.logradouro,
+        neighborhood: data.bairro,
+        city: data.localidade,
+        state: data.uf,
+      },
+    });
   }
 }
