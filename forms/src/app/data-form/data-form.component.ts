@@ -72,6 +72,7 @@ export class DataFormComponent implements OnInit {
       role: [''],
       techs: [''],
       newsletter: ['yes'],
+      terms: [false, Validators.requiredTrue],
     });
   }
   onSubmit() {

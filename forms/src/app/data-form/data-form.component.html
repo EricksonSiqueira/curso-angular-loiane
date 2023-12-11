@@ -103,6 +103,18 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <div class="col-md-3">
+      <div class="checkbox">
+        <label for="" class="checkbox-inline">
+          <input type="checkbox" formControlName="terms"> Accept terms
+        </label>
+        <app-error-field [showError]="verifyValidTouched('terms')" errorText="Please accept the terms before submiting">
+        </app-error-field>
+      </div>
+    </div>
+  </div>
+
 
   <button type="submit" class="btn btn-primary mt-2 w-25">Submit</button>
   <button type="button" class="btn btn-primary mt-2 w-25" (click)="setRole()">Set default role</button><button
