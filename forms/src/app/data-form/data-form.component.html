@@ -123,6 +123,7 @@
         <input type="checkbox" [formControlName]="i" [checked]=""> {{ frameworksOpt[i] }}
       </label>
     </div>
+    <app-error-field [showError]="!form.get('frameworks')?.valid" errorText="Select at least two options" />
   </div>
 
 

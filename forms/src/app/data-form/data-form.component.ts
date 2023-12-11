@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
@@ -14,6 +15,7 @@ import { Observable } from 'rxjs';
 import { Role } from '../shared/models/role';
 import { Technology } from '../shared/models/technology';
 import { NewsletterOp } from '../shared/models/newsletter';
+import { FormValidations } from '../shared/form-validations';
 
 @Component({
   selector: 'app-data-form',
@@ -83,7 +85,10 @@ export class DataFormComponent implements OnInit {
     const frameworksValues = this.frameworksOpt.map(
       () => new FormControl(false)
     );
-    return this.formBuilder.array(frameworksValues);
+    return this.formBuilder.array(
+      frameworksValues,
+      FormValidations.requiredMinCheckbox(2)
+    );
   }
 
   getFrameworksControls() {
@@ -101,7 +106,6 @@ export class DataFormComponent implements OnInit {
         .filter(Boolean),
     });
 
-    console.log(valueSubmit);
     if (this.form.valid) {
       this.http
         .post('https://httpbiaaan.org/post', JSON.stringify(this.form.value))
