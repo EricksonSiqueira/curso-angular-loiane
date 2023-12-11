@@ -122,20 +122,16 @@ export class DataFormComponent implements OnInit {
         .filter(Boolean),
     });
 
-    console.log(this.form);
-
     if (this.form.valid) {
       this.http
         .post('https://httpbiaaan.org/post', JSON.stringify(this.form.value))
         .subscribe(
           (data: any) => {
-            console.log(data);
             this.form.reset();
           },
           (error) => alert('erro')
         );
     } else {
-      console.log('form invalido');
       this.verifyFormValidation(this.form);
     }
   }

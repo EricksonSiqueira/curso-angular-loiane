@@ -6,6 +6,9 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 
+interface Config {
+  [key: string]: string;
+}
 export class FormValidations {
   static requiredMinCheckbox(min = 1) {
     return (formArray: AbstractControl) => {
@@ -52,5 +55,21 @@ export class FormValidations {
       throw new Error('formControl is not an instance of FormControl.');
     };
     return validator;
+  }
+
+  static getErrorMsg(
+    fieldName: string,
+    validatorName: string,
+    validatorValue?: any
+  ) {
+    const config = {
+      required: `${fieldName} is required.`,
+      minlength: `${fieldName} needs at least ${validatorValue.requiredLength} characters.`,
+      maxlength: `${fieldName} can have only ${validatorValue.requiredLength} characters.`,
+      equalsTo: `${fieldName} has to match with the field ${validatorValue}`,
+      invalidCep: `Invalid CEP.`,
+    } as Config;
+
+    return config[validatorName];
   }
 }

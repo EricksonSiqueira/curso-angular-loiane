@@ -29,7 +29,6 @@ export class TemplateFormComponent {
     this.http
       .post('https://httpbin.org/post', JSON.stringify(form.value))
       .subscribe((data: any) => {
-        console.log(data);
         form.form.reset();
       });
   }
