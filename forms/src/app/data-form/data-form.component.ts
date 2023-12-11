@@ -11,7 +11,17 @@ import {
 import { DropdownService } from '../shared/services/dropdown.service';
 import { BrazilianState } from '../shared/models/brazilian-state';
 import { CepService } from '../shared/services/cep.service';
-import { Observable, map } from 'rxjs';
+import {
+  EMPTY,
+  Observable,
+  delay,
+  distinctUntilChanged,
+  empty,
+  map,
+  of,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { Role } from '../shared/models/role';
 import { Technology } from '../shared/models/technology';
 import { NewsletterOp } from '../shared/models/newsletter';
@@ -95,6 +105,20 @@ export class DataFormComponent implements OnInit {
       terms: [false, Validators.requiredTrue],
       frameworks: this.buildFrameworks(),
     });
+
+    this.form
+      .get('address.cep')
+      ?.statusChanges.pipe(
+        delay(300),
+        distinctUntilChanged(),
+        tap((value) => console.log('status CEP: ', value)),
+        switchMap((status) =>
+          status === 'VALID'
+            ? this.cepService.getCep(this.form.get('address.cep')?.value)
+            : EMPTY
+        )
+      )
+      .subscribe((data) => (data ? this.populateForm(data) : {}));
   }
 
   buildFrameworks() {
@@ -167,20 +191,19 @@ export class DataFormComponent implements OnInit {
     };
   }
 
-  consultCEP() {
-    const cep = this.form.get('address.cep')?.value;
+  // consultCEP() {
+  //   const cep = this.form.get('address.cep')?.value;
 
-    if (cep != null && cep !== '') {
-      this.cepService.getCep(cep)?.subscribe((data) => {
-        this.populateForm(data);
-      });
-    }
-  }
+  //   if (cep != null && cep !== '') {
+  //     this.cepService.getCep(cep)?.subscribe((data) => {
+  //       this.populateForm(data);
+  //     });
+  //   }
+  // }
 
   populateForm(data: any) {
     this.form.patchValue({
       address: {
-        cep: data.cep,
         complement: data.complemento,
         street: data.logradouro,
         neighborhood: data.bairro,

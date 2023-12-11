@@ -31,9 +31,8 @@
     <div class="row g-3">
       <div class="col-2">
         <label for="cep">CEP</label>
-        <input type="text" name="cep" id="cep" class="form-control" placeholder="00.000-000" formControlName="cep"
-          (blur)="consultCEP()">
-        <app-error-field [showError]="verifyValidTouched('address.cep')" errorText="CEP is required.">
+        <input type="text" name="cep" id="cep" class="form-control" placeholder="00.000-000" formControlName="cep">
+        <app-error-field [showError]=" verifyValidTouched('address.cep')" errorText="CEP is required.">
         </app-error-field>
         <app-error-field [showError]="!!form.get('address.cep')?.hasError('invalidCep')" errorText="CEP is invalid">
         </app-error-field>
