@@ -13,6 +13,14 @@
     <app-error-field errorText="Email must be a valid email address" [showError]="isEmailValid()"></app-error-field>
   </div>
 
+  <div class="form-group" [ngClass]="applyCssError('email')">
+    <label for="confirmEmail">Confirm email</label>
+    <input type="email" class="form-control" id="confirmEmail" placeholder="nome@email.com"
+      formControlName="confirmEmail" [ngClass]="applyCssError('confirmEmail')">
+    <app-error-field [showError]="!!form.get('confirmEmail')?.hasError('equalsTo')" errorText="Emails must be equal">
+    </app-error-field>
+  </div>
+
   <div formGroupName="address">
     <div class="row g-3">
       <div class="col-2">

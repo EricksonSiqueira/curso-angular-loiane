@@ -63,6 +63,14 @@ export class DataFormComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
+      confirmEmail: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          FormValidations.equalsTo('email'),
+        ],
+      ],
       address: this.formBuilder.group({
         cep: ['', [Validators.required, FormValidations.cepValidator]],
         number: ['', Validators.required],
