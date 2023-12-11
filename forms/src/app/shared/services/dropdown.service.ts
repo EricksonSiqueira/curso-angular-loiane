@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { BrazilianState } from '../models/brazilian-state';
 import { Role } from '../models/role';
 import { Technology } from '../models/technology';
+import { NewsletterOp } from '../models/newsletter';
 
 @Injectable()
 export class DropdownService {
@@ -38,5 +39,12 @@ export class DropdownService {
       { name: 'PHP', description: 'PHP programming language' },
       { name: 'Ruby', description: 'Ruby programming language' },
     ] as Technology[];
+  }
+
+  getNewsletter() {
+    return [
+      { value: 'yes', description: 'Yes' },
+      { value: 'no', description: 'No' },
+    ] as NewsletterOp[];
   }
 }

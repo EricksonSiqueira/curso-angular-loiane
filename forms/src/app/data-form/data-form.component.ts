@@ -12,6 +12,7 @@ import { CepService } from '../shared/services/cep.service';
 import { Observable } from 'rxjs';
 import { Role } from '../shared/models/role';
 import { Technology } from '../shared/models/technology';
+import { NewsletterOp } from '../shared/models/newsletter';
 
 @Component({
   selector: 'app-data-form',
@@ -24,6 +25,7 @@ export class DataFormComponent implements OnInit {
   states!: Observable<BrazilianState[]>;
   roles!: Role[];
   techs!: Technology[];
+  newsletterOp!: NewsletterOp[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,6 +47,7 @@ export class DataFormComponent implements OnInit {
     this.states = this.dropdownService.getBrazilianStates();
     this.roles = this.dropdownService.getRoles();
     this.techs = this.dropdownService.getTechnologies();
+    this.newsletterOp = this.dropdownService.getNewsletter();
 
     this.form = this.formBuilder.group({
       name: [
@@ -68,6 +71,7 @@ export class DataFormComponent implements OnInit {
 
       role: [''],
       techs: [''],
+      newsletter: ['yes'],
     });
   }
   onSubmit() {
