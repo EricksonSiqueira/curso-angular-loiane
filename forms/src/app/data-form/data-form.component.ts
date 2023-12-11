@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -26,6 +27,7 @@ export class DataFormComponent implements OnInit {
   roles!: Role[];
   techs!: Technology[];
   newsletterOp!: NewsletterOp[];
+  frameworksOpt = ['Angular', 'React', 'Vue', 'Sencha'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -73,9 +75,33 @@ export class DataFormComponent implements OnInit {
       techs: [''],
       newsletter: ['yes'],
       terms: [false, Validators.requiredTrue],
+      frameworks: this.buildFrameworks(),
     });
   }
+
+  buildFrameworks() {
+    const frameworksValues = this.frameworksOpt.map(
+      () => new FormControl(false)
+    );
+    return this.formBuilder.array(frameworksValues);
+  }
+
+  getFrameworksControls() {
+    return this.form.get('frameworks')
+      ? (<FormArray>this.form.get('frameworks')).controls
+      : null;
+  }
+
   onSubmit() {
+    let valueSubmit = Object.assign({}, this.form.value);
+
+    valueSubmit = Object.assign(valueSubmit, {
+      frameworks: valueSubmit.frameworks
+        .map((v: any, index: number) => (v ? this.frameworksOpt[index] : null))
+        .filter(Boolean),
+    });
+
+    console.log(valueSubmit);
     if (this.form.valid) {
       this.http
         .post('https://httpbiaaan.org/post', JSON.stringify(this.form.value))

@@ -115,6 +115,16 @@
     </div>
   </div>
 
+  <div>
+    <label for="frameworks">Frameworks</label>
+    <div class="checkbox" class="col-sm-4" formArrayName="frameworks"
+      *ngFor="let item of getFrameworksControls(); let i = index">
+      <label class="checkbox-inline">
+        <input type="checkbox" [formControlName]="i" [checked]=""> {{ frameworksOpt[i] }}
+      </label>
+    </div>
+  </div>
+
 
   <button type="submit" class="btn btn-primary mt-2 w-25">Submit</button>
   <button type="button" class="btn btn-primary mt-2 w-25" (click)="setRole()">Set default role</button><button
