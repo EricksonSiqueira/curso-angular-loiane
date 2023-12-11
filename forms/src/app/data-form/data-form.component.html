@@ -11,6 +11,11 @@
     <app-error-field errorText="Email is required"
       [showError]="(form.get('email')?.errors?.['required'] && form.get('email')?.touched) || false"></app-error-field>
     <app-error-field errorText="Email must be a valid email address" [showError]="isEmailValid()"></app-error-field>
+    <app-error-field errorText="Validating email..."
+      [showError]="form.get('email')?.status === 'PENDING'"></app-error-field>
+    <app-error-field errorText="Valid email" [showError]="form.get('email')?.status === 'VALID'"></app-error-field>
+    <app-error-field errorText="Email is already used"
+      [showError]="!!form.get('email')?.hasError('emailInvalid')"></app-error-field>
   </div>
 
   <div class="form-group" [ngClass]="applyCssError('email')">

@@ -11,11 +11,12 @@ import {
 import { DropdownService } from '../shared/services/dropdown.service';
 import { BrazilianState } from '../shared/models/brazilian-state';
 import { CepService } from '../shared/services/cep.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Role } from '../shared/models/role';
 import { Technology } from '../shared/models/technology';
 import { NewsletterOp } from '../shared/models/newsletter';
 import { FormValidations } from '../shared/form-validations';
+import { VerifyEmailService } from './services/verify-email.service';
 
 @Component({
   selector: 'app-data-form',
@@ -35,7 +36,8 @@ export class DataFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private dropdownService: DropdownService,
-    private cepService: CepService
+    private cepService: CepService,
+    private verifyEmailService: VerifyEmailService
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +55,8 @@ export class DataFormComponent implements OnInit {
     this.techs = this.dropdownService.getTechnologies();
     this.newsletterOp = this.dropdownService.getNewsletter();
 
+    this.verifyEmailService.verifyEmail('em6@ex.co').subscribe();
+
     this.form = this.formBuilder.group({
       name: [
         '',
@@ -62,7 +66,11 @@ export class DataFormComponent implements OnInit {
           Validators.maxLength(20),
         ],
       ],
-      email: ['', [Validators.required, Validators.email]],
+      email: [
+        '',
+        [Validators.required, Validators.email],
+        this.validateEmailAddress.bind(this),
+      ],
       confirmEmail: [
         '',
         [
@@ -203,5 +211,13 @@ export class DataFormComponent implements OnInit {
 
   setTechs() {
     this.form.get('techs')?.setValue(['Java', 'JavaScript']);
+  }
+
+  validateEmailAddress(formControl: AbstractControl) {
+    return this.verifyEmailService
+      .verifyEmail(formControl.value)
+      .pipe(
+        map((emailExists) => (emailExists ? { emailInvalid: true } : null))
+      );
   }
 }
