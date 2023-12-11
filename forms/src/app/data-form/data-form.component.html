@@ -21,6 +21,8 @@
           (blur)="consultCEP()">
         <app-error-field [showError]="verifyValidTouched('address.cep')" errorText="CEP is required.">
         </app-error-field>
+        <app-error-field [showError]="!!form.get('address.cep')?.hasError('invalidCep')" errorText="CEP is invalid">
+        </app-error-field>
       </div>
       <div class="col-2">
         <label for="number">Number</label>
@@ -123,7 +125,8 @@
         <input type="checkbox" [formControlName]="i" [checked]=""> {{ frameworksOpt[i] }}
       </label>
     </div>
-    <app-error-field [showError]="!form.get('frameworks')?.valid" errorText="Select at least two options" />
+    <app-error-field [showError]="!form.get('frameworks')?.valid && !!form.get('frameworks')?.touched"
+      errorText="Select at least two options" />
   </div>
 
 

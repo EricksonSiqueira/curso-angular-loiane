@@ -9,4 +9,16 @@ export class FormValidations {
       return totalChecked >= min ? null : { required: true };
     };
   }
+
+  static cepValidator(control: AbstractControl) {
+    const cep = control.value;
+
+    if (cep) {
+      const validateCep = /^[0-9]{8}$/;
+
+      return validateCep.test(cep) ? null : { invalidCep: true };
+    }
+
+    return null;
+  }
 }

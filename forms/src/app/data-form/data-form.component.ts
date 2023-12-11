@@ -64,7 +64,7 @@ export class DataFormComponent implements OnInit {
       ],
       email: ['', [Validators.required, Validators.email]],
       address: this.formBuilder.group({
-        cep: ['', Validators.required],
+        cep: ['', [Validators.required, FormValidations.cepValidator]],
         number: ['', Validators.required],
         complement: [''],
         street: ['', Validators.required],
@@ -106,6 +106,8 @@ export class DataFormComponent implements OnInit {
         .filter(Boolean),
     });
 
+    console.log(this.form);
+
     if (this.form.valid) {
       this.http
         .post('https://httpbiaaan.org/post', JSON.stringify(this.form.value))
@@ -141,8 +143,9 @@ export class DataFormComponent implements OnInit {
   }
 
   verifyValidTouched(field: string) {
-    return (
-      (this.form.get(field)?.invalid && this.form.get(field)?.touched) || false
+    return !!(
+      this.form.get(field)?.hasError('required') &&
+      (this.form.get(field)?.dirty || this.form.get(field)?.touched)
     );
   }
 
