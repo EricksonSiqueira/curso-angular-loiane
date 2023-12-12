@@ -27,7 +27,7 @@
           <td>{{ course.name }}</td>
           <td>
             <span class="float-lg-end d-flex gap-2">
-              <button class="btn btn-info mb-1 btn-sm">
+              <button class="btn btn-info mb-1 btn-sm" (click)="onEdit(course.id)">
                 Update
               </button>
               <button class="btn btn-danger mb-1 btn-sm">

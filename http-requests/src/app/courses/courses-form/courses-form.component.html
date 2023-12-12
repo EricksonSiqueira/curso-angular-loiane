@@ -20,7 +20,14 @@
     </div>
   </div>
   <div class="col-12 d-flex gap-2">
-    <button class="btn btn-primary" type="submit" (click)="onSubmit()">Create</button>
+    <button class="btn btn-primary" type="submit" (click)="onSubmit()" *ngIf="!hasCourse(); else update">
+      Add
+    </button>
+    <ng-template #update>
+      <button class="btn btn-primary" type="submit" (click)="onUpdate()">
+        Update
+      </button>
+    </ng-template>
     <button class="btn btn-danger" type="submit" (click)="onCancel()">Cancel</button>
   </div>
 </form>

@@ -16,11 +16,19 @@ export class CoursesService {
     return this.http.get<ICourse[]>(this.API_URL).pipe(delay(1000));
   }
 
+  getById(id: string) {
+    return this.http.get<ICourse>(`${this.API_URL}/${id}`).pipe(take(1));
+  }
+
+  edit(course: ICourse) {
+    return this.http.put(`${this.API_URL}/${course.id}`, course);
+  }
+
   delete(id: string) {
     return this.http.delete(`${this.API_URL}/${id}`);
   }
 
-  save(course: string) {
+  save(course: ICourse) {
     return this.http.post(this.API_URL, course).pipe(take(1));
   }
 }

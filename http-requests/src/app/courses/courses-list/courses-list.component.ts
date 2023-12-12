@@ -5,6 +5,7 @@ import { EMPTY, Observable, Subject, catchError } from 'rxjs';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses-list',
@@ -17,7 +18,8 @@ export class CoursesListComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    private alertModalService: AlertModalService
+    private alertModalService: AlertModalService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,5 +40,9 @@ export class CoursesListComponent implements OnInit {
       'Error loading courses, please try again later.',
       'danger'
     );
+  }
+
+  onEdit(id: number) {
+    this.router.navigate(['courses/edit', id]);
   }
 }
