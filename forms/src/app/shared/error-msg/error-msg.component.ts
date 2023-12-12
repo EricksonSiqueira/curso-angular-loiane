@@ -8,7 +8,7 @@ import { FormValidations } from '../form-validations';
   styleUrls: ['./error-msg.component.css'],
 })
 export class ErrorMsgComponent implements OnInit {
-  @Input() formControl!: FormControl;
+  @Input() control!: FormControl;
   @Input() label!: string;
 
   constructor() {}
@@ -16,15 +16,15 @@ export class ErrorMsgComponent implements OnInit {
   ngOnInit() {}
 
   get errorMsg() {
-    for (const propertyName in this.formControl.errors) {
+    for (const propertyName in this.control.errors) {
       if (
-        this.formControl.errors.hasOwnProperty(propertyName) &&
-        this.formControl.touched
+        this.control.errors.hasOwnProperty(propertyName) &&
+        this.control.touched
       ) {
         return FormValidations.getErrorMsg(
           this.label,
           propertyName,
-          this.formControl.errors[propertyName]
+          this.control.errors[propertyName]
         );
       }
     }

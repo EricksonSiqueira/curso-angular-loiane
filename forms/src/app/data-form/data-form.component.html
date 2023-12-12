@@ -9,22 +9,14 @@
     <label for="email">Email</label>
     <input type="text" formControlName="email" id="email" class="form-control" placeholder="name@email.com" required
       email>
-    <app-error-field errorText="Email is required"
-      [showError]="(form.get('email')?.errors?.['required'] && form.get('email')?.touched) || false"></app-error-field>
-    <app-error-field errorText="Email must be a valid email address" [showError]="isEmailValid()"></app-error-field>
-    <app-error-field errorText="Validating email..."
-      [showError]="form.get('email')?.status === 'PENDING'"></app-error-field>
-    <app-error-field errorText="Valid email" [showError]="form.get('email')?.status === 'VALID'"></app-error-field>
-    <app-error-field errorText="Email is already used"
-      [showError]="!!form.get('email')?.hasError('emailInvalid')"></app-error-field>
+    <app-error-msg [formControl]="$any(form.get('email'))" label="Email"></app-error-msg>
   </div>
 
   <div class="form-group" [ngClass]="applyCssError('email')">
     <label for="confirmEmail">Confirm email</label>
     <input type="email" class="form-control" id="confirmEmail" placeholder="nome@email.com"
       formControlName="confirmEmail" [ngClass]="applyCssError('confirmEmail')">
-    <app-error-field [showError]="!!form.get('confirmEmail')?.hasError('equalsTo')" errorText="Emails must be equal">
-    </app-error-field>
+    <app-error-msg [formControl]="$any(form.get('confirmEmail'))" label="ConfirmEmail"></app-error-msg>
   </div>
 
   <div formGroupName="address">
@@ -32,31 +24,25 @@
       <div class="col-2">
         <label for="cep">CEP</label>
         <input type="text" name="cep" id="cep" class="form-control" placeholder="00.000-000" formControlName="cep">
-        <app-error-field [showError]=" verifyValidTouched('address.cep')" errorText="CEP is required.">
-        </app-error-field>
-        <app-error-field [showError]="!!form.get('address.cep')?.hasError('invalidCep')" errorText="CEP is invalid">
-        </app-error-field>
+        <app-error-msg [formControl]="$any(form.get('cep'))" label="CEP"></app-error-msg>
       </div>
       <div class="col-2">
         <label for="number">Number</label>
         <input type="text" name="number" id="number" class="form-control" placeholder="12" formControlName="number">
-        <app-error-field [showError]="verifyValidTouched('address.number')" errorText="Number is required.">
-        </app-error-field>
+        <app-error-msg [formControl]="$any(form.get('number'))" label="Number"></app-error-msg>
       </div>
       <div class="col-8">
         <label for="complement">Complement</label>
         <input type="text" name="complement" id="complement" class="form-control" placeholder="apartment 201 block 902"
           formControlName="complement">
-        <app-error-field [showError]="verifyValidTouched('address.complement')" errorText="complement is required.">
-        </app-error-field>
+        <app-error-msg [formControl]="$any(form.get('complement'))" label="Complement"></app-error-msg>
       </div>
     </div>
 
     <div class="form-group">
       <label for="street">Street</label>
       <input type="text" name="street" id="street" class="form-control" placeholder="Street" formControlName="street">
-      <app-error-field [showError]="verifyValidTouched('address.street')" errorText="Street is required.">
-      </app-error-field>
+      <app-error-msg [formControl]="$any(form.get('street'))" label="Street"></app-error-msg>
     </div>
 
     <div class="row g-3">
@@ -64,16 +50,13 @@
         <label for="neighborhood">Neighborhood</label>
         <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Bangu"
           formControlName="neighborhood">
-        <app-error-field [showError]="verifyValidTouched('address.neighborhood')"
-          errorText="Neineighborhood is required.">
-        </app-error-field>
+        <app-error-msg [formControl]="$any(form.get('neighborhood'))" label="Neighborhood"></app-error-msg>
       </div>
       <div class="col-4">
         <label for="city">City</label>
         <input type="text" name="city" id="city" class="form-control" placeholder="Rio de Janeiro"
           formControlName="city">
-        <app-error-field [showError]="verifyValidTouched('address.city')" errorText="City is required.">
-        </app-error-field>
+        <app-error-msg [formControl]="$any(form.get('city'))" label="City"></app-error-msg>
       </div>
       <div class="col-3">
         <label for="state">State</label>
@@ -81,8 +64,7 @@
           formControlName="state">
           <option *ngFor="let state of states | async" [value]="state.acronym">{{state.name}}</option>
         </select>
-        <app-error-field [showError]="verifyValidTouched('address.state')" errorText="State is required">
-        </app-error-field>
+        <app-error-msg [formControl]="$any(form.get('state'))" label="State"></app-error-msg>
       </div>
     </div>
   </div>
