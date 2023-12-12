@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss'],
 })
-export class CoursesListComponent implements OnInit, OnDestroy {
+export class CoursesListComponent implements OnInit {
   courses$!: Observable<ICourse[]>;
 
   constructor(private coursesService: CoursesService) {}
@@ -16,6 +16,4 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.courses$ = this.coursesService.list();
   }
-
-  ngOnDestroy(): void {}
 }
