@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { EMPTY, catchError, map, switchMap } from 'rxjs';
 import { ICourse } from '../interfaces/course';
+import { CrudService } from 'src/app/shared/crud.service';
 
 @Component({
   selector: 'app-courses-form',
@@ -17,7 +18,7 @@ export class CoursesFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private coursesService: CoursesService,
+    private coursesService: CrudService,
     private alertModalService: AlertModalService,
     private router: Router,
     private route: ActivatedRoute
@@ -73,7 +74,7 @@ export class CoursesFormComponent implements OnInit {
     this.submited = true;
     if (this.form.valid) {
       this.coursesService
-        .edit(this.form.value)
+        .edit<ICourse>(this.form.value['id'], this.form.value)
         .pipe(
           catchError(() => {
             this.alertModalService.showAlert(

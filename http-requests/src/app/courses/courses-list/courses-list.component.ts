@@ -5,6 +5,8 @@ import { EMPTY, Observable, Subject, catchError, switchMap, take } from 'rxjs';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { CrudService } from 'src/app/shared/crud.service';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-courses-list',
@@ -21,17 +23,19 @@ export class CoursesListComponent implements OnInit {
   selectedCourse: ICourse | null = null;
 
   constructor(
-    private coursesService: CoursesService,
+    private coursesService: CrudService,
     private alertModalService: AlertModalService,
     private router: Router
-  ) {}
+  ) {
+    this.coursesService.setApiUrl(`${environment.API}courses`);
+  }
 
   ngOnInit(): void {
     this.onRefresh();
   }
 
   onRefresh() {
-    this.courses$ = this.coursesService.list().pipe(
+    this.courses$ = this.coursesService.list<ICourse>().pipe(
       catchError(() => {
         this.handleError();
         return EMPTY;
