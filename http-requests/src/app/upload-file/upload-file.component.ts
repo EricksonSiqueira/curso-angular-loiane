@@ -3,6 +3,7 @@ import { UploadFileService } from './upload-file.service';
 import { EMPTY, Subscribable, Subscription, catchError, take } from 'rxjs';
 import { AlertModalService } from '../shared/alert-modal.service';
 import { environment } from 'src/environments/environments';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-upload-file',
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environments';
 export class UploadFileComponent implements OnDestroy {
   files: Set<File> = new Set();
   sub: Subscription = new Subscription();
+  uploadProgress = 0;
 
   constructor(
     private uploadFileService: UploadFileService,
@@ -19,6 +21,7 @@ export class UploadFileComponent implements OnDestroy {
   ) {}
 
   onChange(event: any): void {
+    this.uploadProgress = 0;
     [...event.srcElement.files].forEach((file) => {
       this.files.add(file);
     });
@@ -38,12 +41,17 @@ export class UploadFileComponent implements OnDestroy {
             return EMPTY;
           })
         )
-        .subscribe(() => {
-          this.alertModalService.showAlert(
-            'Successfully uploaded files!',
-            'success',
-            3000
-          );
+        .subscribe((event: HttpEvent<Object>) => {
+          if (event.type === HttpEventType.Response) {
+            this.alertModalService.showAlert(
+              'Successfully uploaded files!',
+              'success',
+              3000
+            );
+          } else if (event.type === HttpEventType.UploadProgress) {
+            const percentDone = Math.round((event.loaded * 100) / event.total!);
+            this.uploadProgress = percentDone;
+          }
         });
     }
   }
