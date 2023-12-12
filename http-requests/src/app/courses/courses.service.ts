@@ -24,8 +24,8 @@ export class CoursesService {
     return this.http.put(`${this.API_URL}/${course.id}`, course);
   }
 
-  delete(id: string) {
-    return this.http.delete(`${this.API_URL}/${id}`);
+  delete(id: number) {
+    return this.http.delete(`${this.API_URL}/${id}`).pipe(take(1));
   }
 
   save(course: ICourse) {

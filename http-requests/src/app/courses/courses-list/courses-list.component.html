@@ -30,7 +30,7 @@
               <button class="btn btn-info mb-1 btn-sm" (click)="onEdit(course.id!)">
                 Update
               </button>
-              <button class="btn btn-danger mb-1 btn-sm">
+              <button class="btn btn-danger mb-1 btn-sm" (click)="onDelete(course)">
                 Remove
               </button>
             </span>
@@ -43,3 +43,11 @@
     </ng-template>
   </div>
 </div>
+
+<ng-template #deleteCourseModal>
+  <div class="modal-body text-center">
+    <p>Are you sure that you want to delete this course?</p>
+    <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">No</button>
+  </div>
+</ng-template>
