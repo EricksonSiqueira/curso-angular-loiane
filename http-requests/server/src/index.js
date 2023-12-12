@@ -8,11 +8,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const corsOptions = {
-  origin: "*",
-  optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: "*",
+//   optionsSuccessStatus: 200,
+// };
+// app.use(cors(corsOptions));
 
 const multipartMiddleware = multparty({ uploadDir: "./uploads" });
 

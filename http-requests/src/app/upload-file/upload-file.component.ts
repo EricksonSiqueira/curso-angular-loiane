@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { UploadFileService } from './upload-file.service';
 import { EMPTY, Subscribable, Subscription, catchError, take } from 'rxjs';
 import { AlertModalService } from '../shared/alert-modal.service';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-upload-file',
@@ -26,7 +27,7 @@ export class UploadFileComponent implements OnDestroy {
   onUpload() {
     if (this.files.size > 0) {
       this.sub = this.uploadFileService
-        .upload(this.files, 'http://localhost:8000/upload')
+        .upload(this.files, `${environment.BASE_URL}/upload`)
         .pipe(
           catchError(() => {
             this.alertModalService.showAlert(
