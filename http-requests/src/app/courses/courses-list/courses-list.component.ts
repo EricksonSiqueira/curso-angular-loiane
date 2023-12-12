@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ICourse } from '../interfaces/course';
 import { CoursesService } from '../courses.service';
-import { EMPTY, Observable, Subject, catchError } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, switchMap, take } from 'rxjs';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Router } from '@angular/router';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-courses-list',
@@ -23,8 +23,7 @@ export class CoursesListComponent implements OnInit {
   constructor(
     private coursesService: CoursesService,
     private alertModalService: AlertModalService,
-    private router: Router,
-    private modalService: BsModalService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +32,7 @@ export class CoursesListComponent implements OnInit {
 
   onRefresh() {
     this.courses$ = this.coursesService.list().pipe(
-      catchError((error) => {
+      catchError(() => {
         this.handleError();
         return EMPTY;
       })
@@ -52,17 +51,18 @@ export class CoursesListComponent implements OnInit {
   }
 
   onDelete(course: ICourse) {
-    this.selectedCourse = course;
+    const result$ = this.alertModalService.showConfirm(
+      'Delete course',
+      'Are you sure that you want to delete this course?'
+    );
 
-    this.deleteModalRef = this.modalService.show(this.deleteCourseModal, {
-      class: 'modal-sm',
-    });
-  }
-
-  onConfirmDelete() {
-    this.coursesService
-      .delete(this.selectedCourse?.id!)
+    result$
+      .asObservable()
       .pipe(
+        take(1),
+        switchMap((result) =>
+          result ? this.coursesService.delete(course.id!) : EMPTY
+        ),
         catchError(() => {
           this.alertModalService.showAlert(
             'Error deleting course, please try again later.',
@@ -76,11 +76,5 @@ export class CoursesListComponent implements OnInit {
         this.alertModalService.showAlert('Course deleted!', 'success');
         this.onRefresh();
       });
-    this.deleteModalRef.hide();
-  }
-
-  onDeclineDelete() {
-    this.deleteModalRef.hide();
-    this.selectedCourse = null;
   }
 }
