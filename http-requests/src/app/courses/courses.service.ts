@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICourse } from './interfaces/course';
 import { environment } from 'src/environments/environments';
-import { delay } from 'rxjs';
+import { delay, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +18,9 @@ export class CoursesService {
 
   delete(id: string) {
     return this.http.delete(`${this.API_URL}/${id}`);
+  }
+
+  save(course: string) {
+    return this.http.post(this.API_URL, course).pipe(take(1));
   }
 }

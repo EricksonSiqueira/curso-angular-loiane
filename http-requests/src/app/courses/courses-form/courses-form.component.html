@@ -1,0 +1,26 @@
+<form class="row g-3 needs-validation mt-2" novalidate [formGroup]="form">
+  <div class="col-sm-12">
+    <label for="name" class="form-label">Course name</label>
+    <input type="text" class="form-control" id="name" placeholder="Angular" formControlName="name"
+      [ngClass]="{'is-invalid': submited && hasError('name'), 'is-valid':  !hasError('name')}">
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+    <div id="validationServerNameFeedback" class="invalid-feedback"
+      *ngIf="hasError('name') && hasError('name')?.['required']">
+      Please choose a name for the course.
+    </div>
+    <div id="validationServerNameFeedback" class="invalid-feedback"
+      *ngIf="hasError('name') && hasError('name')?.['minlength']">
+      The course name must have at least {{ hasError('name')?.['minlength']?.requiredLength}} characters.
+    </div>
+    <div id="validationServerNameFeedback" class="invalid-feedback"
+      *ngIf="hasError('name') && hasError('name')?.['maxlength']">
+      The course name must have at max {{ hasError('name')?.['maxlength']?.requiredLength}} characters.
+    </div>
+  </div>
+  <div class="col-12 d-flex gap-2">
+    <button class="btn btn-primary" type="submit" (click)="onSubmit()">Create</button>
+    <button class="btn btn-danger" type="submit" (click)="onCancel()">Cancel</button>
+  </div>
+</form>

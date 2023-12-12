@@ -10,10 +10,18 @@ type AlertType = 'success' | 'danger' | 'warning';
 export class AlertModalService {
   constructor(private bsModalService: BsModalService) {}
 
-  showAlert(message: string, type: AlertType = 'warning') {
+  showAlert(
+    message: string,
+    type: AlertType = 'warning',
+    dismissTimeout?: number
+  ) {
     const bsModalRef: BsModalRef =
       this.bsModalService.show(AlertModalComponent);
     bsModalRef.content.message = message;
     bsModalRef.content.type = type;
+
+    if (dismissTimeout) {
+      setTimeout(() => bsModalRef.hide(), dismissTimeout);
+    }
   }
 }

@@ -7,6 +7,22 @@
     {
       "name": "Java",
       "id": 2
+    },
+    {
+      "name": "Angular novo",
+      "id": 3
+    },
+    {
+      "name": "Angular novo",
+      "id": 4
+    },
+    {
+      "name": "Java 8",
+      "id": 5
+    },
+    {
+      "name": "Teste",
+      "id": 6
     }
   ]
 }
