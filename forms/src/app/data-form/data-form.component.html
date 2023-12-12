@@ -2,21 +2,21 @@
   <div class="form-group" [ngClass]="applyCssError('name')">
     <label for="name">Name</label>
     <input type="text" formControlName="name" id="name" class="form-control" placeholder="Name" required>
-    <app-error-msg [formControl]="$any(form.get('name'))" label="Name"></app-error-msg>
+    <app-error-msg [control]="$any(form.get('name'))" label="Name"></app-error-msg>
   </div>
 
   <div class="form-group" [ngClass]="applyCssError('email')">
     <label for="email">Email</label>
     <input type="text" formControlName="email" id="email" class="form-control" placeholder="name@email.com" required
       email>
-    <app-error-msg [formControl]="$any(form.get('email'))" label="Email"></app-error-msg>
+    <app-error-msg [control]="$any(form.get('email'))" label="Email"></app-error-msg>
   </div>
 
   <div class="form-group" [ngClass]="applyCssError('email')">
     <label for="confirmEmail">Confirm email</label>
     <input type="email" class="form-control" id="confirmEmail" placeholder="nome@email.com"
       formControlName="confirmEmail" [ngClass]="applyCssError('confirmEmail')">
-    <app-error-msg [formControl]="$any(form.get('confirmEmail'))" label="ConfirmEmail"></app-error-msg>
+    <app-error-msg [control]="$any(form.get('confirmEmail'))" label="ConfirmEmail"></app-error-msg>
   </div>
 
   <div formGroupName="address">
@@ -24,47 +24,49 @@
       <div class="col-2">
         <label for="cep">CEP</label>
         <input type="text" name="cep" id="cep" class="form-control" placeholder="00.000-000" formControlName="cep">
-        <app-error-msg [formControl]="$any(form.get('cep'))" label="CEP"></app-error-msg>
+        <app-error-msg [control]="$any(form.get('address.cep'))" label="CEP"></app-error-msg>
       </div>
       <div class="col-2">
         <label for="number">Number</label>
         <input type="text" name="number" id="number" class="form-control" placeholder="12" formControlName="number">
-        <app-error-msg [formControl]="$any(form.get('number'))" label="Number"></app-error-msg>
+        <app-error-msg [control]="$any(form.get('address.number'))" label="Number"></app-error-msg>
       </div>
       <div class="col-8">
         <label for="complement">Complement</label>
         <input type="text" name="complement" id="complement" class="form-control" placeholder="apartment 201 block 902"
           formControlName="complement">
-        <app-error-msg [formControl]="$any(form.get('complement'))" label="Complement"></app-error-msg>
+        <app-error-msg [control]="$any(form.get('address.complement'))" label="Complement"></app-error-msg>
       </div>
     </div>
 
     <div class="form-group">
       <label for="street">Street</label>
       <input type="text" name="street" id="street" class="form-control" placeholder="Street" formControlName="street">
-      <app-error-msg [formControl]="$any(form.get('street'))" label="Street"></app-error-msg>
+      <app-error-msg [control]="$any(form.get('address.street'))" label="Street"></app-error-msg>
     </div>
 
     <div class="row g-3">
-      <div class="col-5">
+      <div class="col-4">
         <label for="neighborhood">Neighborhood</label>
         <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Bangu"
           formControlName="neighborhood">
-        <app-error-msg [formControl]="$any(form.get('neighborhood'))" label="Neighborhood"></app-error-msg>
+        <app-error-msg [control]="$any(form.get('address.neighborhood'))" label="Neighborhood"></app-error-msg>
       </div>
       <div class="col-4">
         <label for="city">City</label>
-        <input type="text" name="city" id="city" class="form-control" placeholder="Rio de Janeiro"
+        <select type="text" name="city" id="city" class="form-control" placeholder="Rio de Janeiro"
           formControlName="city">
-        <app-error-msg [formControl]="$any(form.get('city'))" label="City"></app-error-msg>
+          <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+        </select>
+        <app-error-msg [control]="$any(form.get('address.city'))" label="City"></app-error-msg>
       </div>
-      <div class="col-3">
+      <div class="col-4">
         <label for="state">State</label>
         <select type="text" name="state" id="state" class="form-control" placeholder="Rio de Janeiro"
           formControlName="state">
-          <option *ngFor="let state of states | async" [value]="state.acronym">{{state.name}}</option>
+          <option *ngFor="let state of states" [value]="state.acronym">{{state.name}}</option>
         </select>
-        <app-error-msg [formControl]="$any(form.get('state'))" label="State"></app-error-msg>
+        <app-error-msg [control]="$any(form.get('address.state'))" label="State"></app-error-msg>
       </div>
     </div>
   </div>

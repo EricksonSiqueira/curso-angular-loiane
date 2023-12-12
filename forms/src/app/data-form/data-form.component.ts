@@ -16,9 +16,7 @@ import {
   Observable,
   delay,
   distinctUntilChanged,
-  empty,
   map,
-  of,
   switchMap,
   tap,
 } from 'rxjs';
@@ -35,8 +33,9 @@ import { VerifyEmailService } from './services/verify-email.service';
 })
 export class DataFormComponent implements OnInit {
   form!: FormGroup;
-  // states!: BrazilianState[];
-  states!: Observable<BrazilianState[]>;
+  states!: BrazilianState[];
+  cities!: string[];
+  // states!: Observable<BrazilianState[]>;
   roles!: Role[];
   techs!: Technology[];
   newsletterOp!: NewsletterOp[];
@@ -60,7 +59,9 @@ export class DataFormComponent implements OnInit {
     //   this.states = data as BrazilianState[];
     // });
 
-    this.states = this.dropdownService.getBrazilianStates();
+    this.dropdownService
+      .getBrazilianStates()
+      .subscribe((data) => (this.states = data as BrazilianState[]));
     this.roles = this.dropdownService.getRoles();
     this.techs = this.dropdownService.getTechnologies();
     this.newsletterOp = this.dropdownService.getNewsletter();
@@ -119,6 +120,15 @@ export class DataFormComponent implements OnInit {
         )
       )
       .subscribe((data) => (data ? this.populateForm(data) : {}));
+
+    console.log('chegou aqui');
+
+    this.form
+      .get('address.state')
+      ?.valueChanges.pipe(
+        switchMap((state) => this.dropdownService.getCities(state))
+      )
+      .subscribe((cities) => (this.cities = cities));
   }
 
   buildFrameworks() {

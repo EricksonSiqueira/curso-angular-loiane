@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { BrazilianState } from '../models/brazilian-state';
 import { Role } from '../models/role';
 import { Technology } from '../models/technology';
@@ -46,5 +46,17 @@ export class DropdownService {
       { value: 'yes', description: 'Yes' },
       { value: 'no', description: 'No' },
     ] as NewsletterOp[];
+  }
+
+  getCities(acronym: string) {
+    return this.http
+      .get('assets/data/estados-cidades.json')
+      .pipe(
+        map(
+          (data: any) =>
+            data.estados.find((e: any) => e.sigla === acronym)
+              .cidades as string[]
+        )
+      );
   }
 }

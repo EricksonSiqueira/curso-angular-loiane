@@ -13,12 +13,14 @@ export class ErrorMsgComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.control);
+  }
 
   get errorMsg() {
     for (const propertyName in this.control.errors) {
       if (
-        this.control.errors.hasOwnProperty(propertyName) &&
+        this?.control?.errors.hasOwnProperty(propertyName) &&
         this.control.touched
       ) {
         return FormValidations.getErrorMsg(
