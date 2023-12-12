@@ -2,6 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ICourse } from '../interfaces/course';
 import { CoursesService } from '../courses.service';
 import { EMPTY, Observable, Subject, catchError } from 'rxjs';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
+import { AlertModalService } from 'src/app/shared/alert-modal.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -12,7 +15,10 @@ export class CoursesListComponent implements OnInit {
   courses$!: Observable<ICourse[]>;
   error$ = new Subject<boolean>();
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(
+    private coursesService: CoursesService,
+    private alertModalService: AlertModalService
+  ) {}
 
   ngOnInit(): void {
     this.onRefresh();
@@ -21,14 +27,16 @@ export class CoursesListComponent implements OnInit {
   onRefresh() {
     this.courses$ = this.coursesService.list().pipe(
       catchError((error) => {
-        console.error(error);
-        this.error$.next(true);
+        this.handleError();
         return EMPTY;
       })
     );
+  }
 
-    this.coursesService.list().subscribe((data) => {
-      console.log(data);
-    });
+  handleError() {
+    this.alertModalService.showAlert(
+      'Error loading courses, please try again later.',
+      'danger'
+    );
   }
 }
