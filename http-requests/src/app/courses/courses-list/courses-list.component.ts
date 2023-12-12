@@ -1,9 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ICourse } from '../interfaces/course';
 import { CoursesService } from '../courses.service';
 import { EMPTY, Observable, Subject, catchError } from 'rxjs';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Router } from '@angular/router';
 

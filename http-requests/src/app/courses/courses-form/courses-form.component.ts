@@ -24,32 +24,18 @@ export class CoursesFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params
-      .pipe(
-        map((params: any) => params['id']),
-        switchMap((id) => this.coursesService.getById(id)),
-        catchError(() => {
-          this.alertModalService.showAlert(
-            `The course with passed ID was not found.`,
-            'danger',
-            4000
-          );
-          this.router.navigate(['/courses']);
-          return EMPTY;
-        })
-      )
-      .subscribe((course) => this.updateForm(course));
+    const course = this.route.snapshot.data['course'];
 
     this.form = this.formBuilder.group({
+      id: [course.id],
       name: [
-        null,
+        course.name,
         [
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(20),
         ],
       ],
-      id: [null],
     });
   }
 
@@ -116,12 +102,5 @@ export class CoursesFormComponent implements OnInit {
 
   hasCourse() {
     return !!this.form.get('id')?.value;
-  }
-
-  updateForm(course: ICourse) {
-    this.form.patchValue({
-      id: course.id,
-      name: course.name,
-    });
   }
 }

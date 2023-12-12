@@ -1,4 +1,4 @@
 export interface ICourse {
-  id: number;
-  name: string;
+  id: number | null;
+  name: string | null;
 }
