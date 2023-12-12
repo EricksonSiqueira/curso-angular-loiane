@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICourse } from './interfaces/course';
 import { environment } from 'src/environments/environments';
+import { delay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class CoursesService {
   private readonly API_URL = `${environment.API}courses`;
 
   list() {
-    return this.http.get<ICourse[]>(this.API_URL);
+    return this.http.get<ICourse[]>(this.API_URL).pipe(delay(1000));
   }
 
   delete(id: string) {

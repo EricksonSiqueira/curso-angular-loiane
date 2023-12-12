@@ -3,9 +3,12 @@
     <div class="float-left">
       <h4>Courses</h4>
     </div>
-    <div class="float-right">
+    <div class="float-right d-flex gap-2">
       <button class="btn btn-primary" [routerLink]="['new']">
         <i class="fa fa-plus"></i> New Course
+      </button>
+      <button class="btn btn-secondary" (click)="onRefresh()">
+        Refresh
       </button>
     </div>
   </div>
@@ -35,6 +38,17 @@
         </tr>
       </tbody>
     </table>
-    <ng-template #loading>loading courses...</ng-template>
+    <ng-template #loading>
+      <div *ngIf="error$ | async; else loadingNoError">
+        <span>
+          Error loading courses, please try again later.
+        </span>
+      </div>
+      <ng-template #loadingNoError>
+        <span>
+          loading courses...
+        </span>
+      </ng-template>
+    </ng-template>
   </div>
 </div>
